@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import mapboxgl from 'mapbox-gl';
   import 'mapbox-gl/dist/mapbox-gl.css';
+  import { Polyline } from '$lib/Polyline';
 
   let mapContainer: HTMLDivElement;
 
@@ -62,39 +63,44 @@
         "geometry": {
           "type": "LineString",
           "coordinates": [
-            [-79.5126, 43.6387], // Kipling
-            [-79.5080, 43.6436], // Islington
-            [-79.4950, 43.6481], // Royal York
-            [-79.4849, 43.6508], // Old Mill
-            [-79.4676, 43.6510], // Jane
-            [-79.4536, 43.6516], // Runnymede
-            [-79.4399, 43.6549], // High Park
-            [-79.4260, 43.6549], // Keele
-            [-79.4133, 43.6561], // Dundas West
-            [-79.4020, 43.6563], // Lansdowne
-            [-79.3936, 43.6609], // Dufferin
-            [-79.3827, 43.6624], // Ossington
-            [-79.3722, 43.6641], // Christie
-            [-79.3641, 43.6648], // Bathurst
-            [-79.3523, 43.6651], // Spadina
-            [-79.3987, 43.6685], // St George
-            [-79.3932, 43.6677], // Museum
-            [-79.3903, 43.6606], // Queen's Park
-            [-79.3886, 43.6547], // St Patrick
-            [-79.3873, 43.6505], // Osgoode
-            [-79.3839, 43.6474], // St Andrew
-            [-79.3792, 43.6453], // Union
-            [-79.3775, 43.6700], // Bloor-Yonge
-            [-79.3798, 43.6821], // Rosedale
-            [-79.3806, 43.6881], // Summerhill
-            [-79.3833, 43.6878], // St Clair
-            [-79.3857, 43.7153], // Davisville
-            [-79.3973, 43.7332], // Eglinton
-            [-79.4025, 43.7410], // Lawrence
-            [-79.4123, 43.7531], // York Mills
-            [-79.4116, 43.7667], // Sheppard-Yonge
-            [-79.4141, 43.7681], // North York Centre
-            [-79.4150, 43.7884]  // Finch
+            [-79.5282, 43.7964], // VAUGHAN METROPOLITAN CENTRE
+            [-79.5216, 43.7699], // HIGHWAY 407
+            [-79.5076, 43.7612], // PIONEER VILLAGE
+            [-79.5013, 43.7743], // YORK UNIVERSITY
+            [-79.4909, 43.7655], // FINCH WEST
+            [-79.4769, 43.7502], // DOWNSVIEW PARK
+            [-79.4623, 43.7499], // SHEPPARD WEST
+            [-79.4503, 43.7345], // WILSON
+            [-79.4476, 43.7245], // YORKDALE
+            [-79.4444, 43.7156], // LAWRENCE WEST
+            [-79.4359, 43.7096], // GLENCAIRN
+            [-79.4359, 43.6997], // EGLINTON WEST
+            [-79.4158, 43.6840], // ST. CLAIR WEST
+            [-79.4065, 43.6747], // DUPONT
+            [-79.4030, 43.6677], // SPADINA
+            [-79.3987, 43.6683], // ST. GEORGE
+            [-79.3936, 43.6670], // MUSEUM
+            [-79.3901, 43.6598], // QUEEN'S PARK
+            [-79.3883, 43.6545], // ST. PATRICK
+            [-79.3866, 43.6505], // OSGOODE
+            [-79.3856, 43.6473], // ST. ANDREW
+            [-79.3806, 43.6453], // UNION
+            [-79.3777, 43.6486], // KING
+            [-79.3793, 43.6526], // QUEEN
+            [-79.3807, 43.6565], // DUNDAS
+            [-79.3828, 43.6605], // COLLEGE
+            [-79.3839, 43.6654], // WELLESLEY
+            [-79.3854, 43.6700], // BLOOR-YONGE
+            [-79.3889, 43.6765], // ROSEDALE
+            [-79.3914, 43.6820], // SUMMERHILL
+            [-79.3938, 43.6872], // ST. CLAIR
+            [-79.3966, 43.6981], // DAVISVILLE
+            [-79.3986, 43.7052], // EGLINTON
+            [-79.4026, 43.7259], // LAWRENCE
+            [-79.4060, 43.7445], // YORK MILLS
+            [-79.4103, 43.7615], // SHEPPARD-YONGE
+            [-79.4124, 43.7681], // NORTH YORK CENTRE
+            [-79.4146, 43.7805]  // FINCH
           ]
         }
       },
@@ -104,19 +110,37 @@
         "geometry": {
           "type": "LineString",
           "coordinates": [
-            [-79.5238, 43.6366], // Kipling
-            [-79.5157, 43.6374], // Islington
-            [-79.4972, 43.6389], // Royal York
-            [-79.4762, 43.6461], // Kennedy
-            [-79.4619, 43.6544], // Main Street
-            [-79.4231, 43.6677], // Woodbine
-            [-79.3231, 43.6841], // Coxwell
-            [-79.3775, 43.6700], // Bloor-Yonge
-            [-79.3987, 43.6685], // St George
-            [-79.4110, 43.6676], // Spadina
-            [-79.4273, 43.6666], // Bathurst
-            [-79.4388, 43.6664], // Christie
-            [-79.4669, 43.6659]  // Ossington
+            [-79.5365, 43.6369], // KIPLING
+            [-79.5238, 43.6453], // ISLINGTON
+            [-79.5110, 43.6484], // ROYAL YORK
+            [-79.4942, 43.6516], // OLD MILL
+            [-79.4836, 43.6498], // JANE
+            [-79.4752, 43.6516], // RUNNYMEDE
+            [-79.4663, 43.6536], // HIGH PARK
+            [-79.4594, 43.6550], // KEELE
+            [-79.4526, 43.6569], // DUNDAS WEST
+            [-79.4425, 43.6591], // LANSDOWNE
+            [-79.4357, 43.6609], // DUFFERIN
+            [-79.4258, 43.6628], // OSSINGTON
+            [-79.4183, 43.6645], // CHRISTIE
+            [-79.4113, 43.6663], // BATHURST
+            [-79.4030, 43.6677], // SPADINA
+            [-79.3987, 43.6683], // ST. GEORGE
+            [-79.3925, 43.6706], // BAY
+            [-79.3854, 43.6700], // BLOOR-YONGE
+            [-79.3766, 43.6726], // SHERBOURNE
+            [-79.3680, 43.6746], // CASTLE FRANK
+            [-79.3578, 43.6768], // BROADVIEW
+            [-79.3527, 43.6784], // CHESTER
+            [-79.3456, 43.6798], // PAPE
+            [-79.3379, 43.6810], // DONLANDS
+            [-79.3301, 43.6824], // GREENWOOD
+            [-79.3230, 43.6840], // COXWELL
+            [-79.3139, 43.6861], // WOODBINE
+            [-79.3018, 43.6884], // MAIN STREET
+            [-79.2878, 43.6955], // VICTORIA PARK
+            [-79.2756, 43.7111], // WARDEN
+            [-79.2655, 43.7323]  // KENNEDY
           ]
         }
       },
@@ -126,10 +150,11 @@
         "geometry": {
           "type": "LineString",
           "coordinates": [
-            [-79.3469, 43.7755], // Don Mills
-            [-79.4116, 43.7667], // Sheppard-Yonge
-            [-79.3873, 43.7697], // Bayview
-            [-79.3645, 43.7717]  // Leslie
+            [-79.4103, 43.7615], // SHEPPARD-YONGE
+            [-79.3857, 43.7669], // BAYVIEW
+            [-79.3764, 43.7690], // BESSARION
+            [-79.3642, 43.7711], // LESLIE
+            [-79.3454, 43.7756]  // DON MILLS
           ]
         }
       }
@@ -148,21 +173,24 @@
     });
 
     map.on('load', () => {
-      // Add subway lines source
-      map.addSource('subway-lines', {
-        type: 'geojson',
-        data: subwayLines
-      });
-
-      // Add subway lines layer
-      map.addLayer({
-        'id': 'subway-routes',
-        'type': 'line',
-        'source': 'subway-lines',
-        'paint': {
-          'line-color': ['get', 'color'],
-          'line-width': 3
-        }
+      // Create polylines for each subway line
+      subwayLines.features.forEach(feature => {
+        if (!feature.properties?.line || !feature.properties?.color) return;
+        
+        const polyline = new Polyline({
+          id: `line-${feature.properties.line}`,
+          points: (feature.geometry as GeoJSON.LineString).coordinates as [number, number][],
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': feature.properties.color,
+            'line-width': 4,
+            'line-blur': 0.5
+          }
+        });
+        polyline.addTo(map);
       });
 
       // Add existing stations source and layer
