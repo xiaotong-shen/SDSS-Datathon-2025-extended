@@ -1,0 +1,155 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 2,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 3,
+        "likelihood_of_delay": 0.9
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 4,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 5,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 6,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 7,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 8,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 9,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 10,
+        "likelihood_of_delay": 0.4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3866,
+          43.6505
+        ]
+      },
+      "properties": {
+        "station": "OSGOODE",
+        "hour": 11,
+        "likelihood_of_delay": 0.4
+      }
+    }
+  ]
+}

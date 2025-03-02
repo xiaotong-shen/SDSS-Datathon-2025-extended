@@ -3,55 +3,43 @@
   import mapboxgl from 'mapbox-gl';
   import 'mapbox-gl/dist/mapbox-gl.css';
   import { Polyline } from '$lib/Polyline';
+  import stationDataJson from './resources/station_data.json' assert { type: 'json' };
 
   let mapContainer: HTMLDivElement;
+  let currentHour = 0; // Track current hour
+  let map: mapboxgl.Map; // Make map accessible in component scope
 
-  // Station data GeoJSON with type annotations
-  const stationData: GeoJSON.FeatureCollection = {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-79.3128, 43.6864]
+  // Function to filter station data by hour
+  function filterStationsByHour(hour: number): GeoJSON.FeatureCollection {
+    return {
+      type: "FeatureCollection" as const,
+      features: stationDataJson.features.map(f => ({
+        type: "Feature" as const,
+        geometry: {
+          type: "Point" as const,
+          coordinates: f.geometry.coordinates
         },
-        "properties": {
-          "station": "WOODBINE STATION",
-          "hour": 0,
-          "avg_delay": 2.15,
-          "incident_count": 33
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-79.3128, 43.6864]
-        },
-        "properties": {
-          "station": "WOODBINE STATION",
-          "hour": 1,
-          "avg_delay": 1.05,
-          "incident_count": 2233
-        }
-      },
-      // ... Add all your other features here ...
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-79.3231, 43.6841]
-        },
-        "properties": {
-          "station": "COXWELL STATION",
-          "hour": 23,
-          "avg_delay": 3.17,
-          "incident_count": 499999
-        }
-      }
-    ]
-  };
+        properties: f.properties
+      })).filter(feature => feature.properties?.hour === hour)
+    };
+  }
+
+  // Function to update map data
+  function updateMapData(hour: number) {
+    if (!map) return;
+    const source = map.getSource('stations') as mapboxgl.GeoJSONSource;
+    if (source) {
+      source.setData(filterStationsByHour(hour));
+    }
+  }
+
+  // Watch for hour changes
+  $: if (map && currentHour !== undefined) {
+    updateMapData(currentHour);
+  }
+
+  // Modify the stationData declaration
+  const stationData = stationDataJson as GeoJSON.FeatureCollection;
 
   // Add this after stationData
   const subwayLines: GeoJSON.FeatureCollection = {
@@ -162,18 +150,18 @@
   };
 
   onMount(() => {
-    const map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
       container: mapContainer,
-      style: 'mapbox://styles/mapbox/dark-v11', // Changed to dark style for better visualization
-      center: [-79.3128, 43.6864], // Negative longitude
+      style: 'mapbox://styles/mapbox/dark-v11',
+      center: [-79.3128, 43.6864],
       zoom: 13,
-      pitch: 0, // Removed tilt for better data visibility
+      pitch: 0,
       antialias: true,
       accessToken: 'pk.eyJ1IjoicGVhY2hlc2dvYmJsciIsImEiOiJjbTdyMzQxMXQxNGNmMmpwdXJrYWd0c3M4In0.rkr_jHMuuHPlbCgGAk_q8w'
     });
 
     map.on('load', () => {
-      // Create polylines for each subway line
+      // Create polylines for subway lines
       subwayLines.features.forEach(feature => {
         if (!feature.properties?.line || !feature.properties?.color) return;
         
@@ -193,10 +181,10 @@
         polyline.addTo(map);
       });
 
-      // Add existing stations source and layer
+      // Add stations source with filtered data
       map.addSource('stations', {
         type: 'geojson',
-        data: stationData
+        data: filterStationsByHour(currentHour)
       });
 
       // Add a layer for the stations
@@ -205,13 +193,13 @@
         'type': 'circle',
         'source': 'stations',
         'paint': {
-          // Circle radius based on incident count - increased size range
+          // Circle radius based on likelihood of delay
           'circle-radius': [
             'interpolate',
             ['linear'],
-            ['get', 'incident_count'],
-            0, 15,    // Minimum size increased to 15px
-            82, 50    // Maximum size increased to 50px
+            ['get', 'likelihood_of_delay'],
+            0, 5,    // Minimum size for 0% likelihood
+            1, 50    // Maximum size for 100% likelihood
           ],
           // Circle color based on average delay
           'circle-color': [
@@ -249,7 +237,7 @@
           <strong>${properties.station}</strong><br>
           Hour: ${properties.hour}:00<br>
           Average Delay: ${properties.avg_delay} minutes<br>
-          Incident Count: ${properties.incident_count}
+          Likelihood of Delay: ${(properties.likelihood_of_delay * 100).toFixed(1)}%
         `;
         
         popup
@@ -270,8 +258,24 @@
 
 <div class="container">
   <h1 class="text-2xl mb-4">Toronto Transit Delays by Station</h1>
+  
+  <!-- Add time slider -->
+  <div class="time-control mb-4">
+    <label for="time-slider" class="block text-sm mb-2">
+      Time: {currentHour.toString().padStart(2, '0')}:00
+    </label>
+    <input
+      id="time-slider"
+      type="range"
+      min="0"
+      max="23"
+      bind:value={currentHour}
+      class="w-full"
+    />
+  </div>
+
   <div class="legend mb-4">
-    <p class="text-sm mb-2">Circle size represents incident count</p>
+    <p class="text-sm mb-2">Circle size represents likelihood of delay</p>
     <p class="text-sm">Circle color represents average delay (green = low, red = high)</p>
   </div>
   <div bind:this={mapContainer} class="map-container"></div>
@@ -307,5 +311,43 @@
   :global(.mapboxgl-popup-content) {
     padding: 1rem;
     font-size: 14px;
+  }
+
+  .time-control {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 4px;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    appearance: none;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  input[type="range"]:hover {
+    opacity: 1;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #4a5568;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #4a5568;
+    cursor: pointer;
   }
 </style>
