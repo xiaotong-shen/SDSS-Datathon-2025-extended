@@ -1,24 +1,52 @@
-node_modules
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Output
-.output
-.vercel
-.netlify
-.wrangler
-/.svelte-kit
-/build
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Streamlit
+.streamlit/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.*
+!.env.example
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Env
-.env
-.env.*
-!.env.example
-!.env.test
-.venv/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
+# Logs
+*.log

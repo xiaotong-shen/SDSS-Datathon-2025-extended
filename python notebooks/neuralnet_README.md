@@ -3,6 +3,8 @@
 ## Overview
 This document outlines the key design decisions, implementation choices, and learning outcomes from developing the TTC subway delay prediction neural network system.
 
+Note: Most of the changes made to the neuralnet.py file is in consideration that the prediction data is going to be used a reference for user queries. 
+
 ---
 
 ## 1. Categorical vs Continuous Temporal Features
@@ -102,22 +104,6 @@ class MultiOutputModel(nn.Module):
         # Input: 10 temporal + 16 station embedding = 26 features
         input_dim = temporal_features + embedding_dim
 ```
-
----
-
-## 5. Critical Bug Fixes
-
-### **Issues Resolved:**
-1. **Variable consistency**: Fixed `time_batch` → `temporal_batch` throughout code
-2. **Data type mismatch**: Added `.astype(np.float32)` to prevent Double/Float errors
-3. **Indentation error**: Fixed prediction loop to process each time point individually
-4. **Missing time variation**: Ensured predictions vary by actual time values
-
-### **Impact:**
-- **Correct timestamps**: Now shows 6:00, 6:30, 7:00, etc. instead of all 01:30
-- **Varied predictions**: Different delay times for different times of day
-- **Station-specific patterns**: Each station shows unique delay characteristics
-
 ---
 
 ## 6. Learning Outcomes
@@ -125,7 +111,6 @@ class MultiOutputModel(nn.Module):
 ### **Technical Insights:**
 - **Feature engineering matters**: Categorical features often outperform continuous for domain-specific problems
 - **Data type consistency**: PyTorch is sensitive to dtype mismatches
-- **Loop structure**: Indentation errors can cause subtle but critical bugs
 - **Memory vs functionality**: Full coverage datasets are worth the memory cost for production systems
 
 ### **Domain Insights:**
@@ -147,17 +132,6 @@ class MultiOutputModel(nn.Module):
 - **Production deployment**: Python scripts are easier to deploy
 - **Code organization**: Cleaner structure without cell outputs
 - **Reproducibility**: More reliable execution across environments
-
----
-
-## 8. Future Enhancements
-
-### **Potential Improvements:**
-- **Weather integration**: Add weather data as additional features
-- **Event data**: Include major events, construction, holidays
-- **Real-time updates**: Periodic model retraining with new data
-- **Confidence intervals**: Add uncertainty estimates to predictions
-- **Multi-line support**: Extend to bus and streetcar predictions
 
 ---
 
