@@ -1,4 +1,13 @@
-# sv
+# TTC Delay Analysis Webapp
+
+## About the Project
+
+This project was initially created as a part of the 2025 SDSS Datathon, where it was also DEMO-ed. 
+
+However, some aspects about the project were not complete, such as the front-end, which hadn't been integrated with the predictive data. I took this break as an opportunity to modify and extend the project, and complete a front-end with . This repository is forked from the original repository for the project, and I will outline the changes and additional contributions I made, later on in this documentation.
+
+## Set Up
+Refer to [SETUP_GUIDE.md]
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
