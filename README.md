@@ -2,11 +2,11 @@
 
 A comprehensive machine learning application for predicting TTC subway delays using neural networks and interactive visualizations.
 
-## 🚇 Overview
+## Overview
 
-This project was initially created for the 2025 SDSS Datathon and has been enhanced with a complete Streamlit frontend, comprehensive data processing, and advanced analytics. The application provides real-time delay predictions for all TTC subway stations with interactive maps, temporal analysis, and risk assessment tools.
+This project was initially created for the 2025 SDSS Datathon and has been enhanced with a complete Streamlit frontend, comprehensive data processing, and more advanced analytics. The application provides real-time delay predictions for all TTC subway stations with interactive maps, temporal analysis, and risk assessment tools.
 
-## ✨ Features
+## Features
 
 - **Interactive Map Visualization**: Real-time delay predictions displayed on an interactive map
 - **Station-Specific Analysis**: Detailed predictions for individual stations
@@ -16,7 +16,25 @@ This project was initially created for the 2025 SDSS Datathon and has been enhan
 - **Statistical Insights**: Overall system performance and peak hour analysis
 - **Dark Mode UI**: Modern, accessible interface optimized for all users
 
-## 🛠️ Quick Setup
+## Demo
+
+### Main Application Interface
+![Main Application Interface](images/main-interface.png)
+*Interactive map showing delay predictions across TTC subway stations with sidebar controls and station details panel*
+
+### Interactive Map Visualization
+![Interactive Map](images/interactive-map.png)
+*Close-up view of the map showing stations with color-coded risk levels and hover information*
+
+### Risk Assessment Dashboard
+![Risk Assessment](images/risk-assessment.png)
+*Detailed station prediction display with color-coded progress bar, risk indicators, and daily timeline chart*
+
+### User Controls and Filtering
+![User Controls](images/user-controls.png)
+*Sidebar controls for time selection, month/day filtering, and station selection with real-time updates*
+
+## Quick Setup
 
 ### Prerequisites
 - Python 3.8+
@@ -47,7 +65,7 @@ streamlit run app.py
 ### 5. Open Your Browser
 Navigate to the URL shown in the terminal (typically `http://localhost:8501`)
 
-## 📊 Data Sources
+## Data Sources
 
 The application uses pre-computed predictions from a neural network model trained on historical TTC data:
 
@@ -69,7 +87,7 @@ The application uses pre-computed predictions from a neural network model traine
 4. **SUMMERHILL**: 33.9% average likelihood
 5. **YORK MILLS**: 32.1% average likelihood
 
-## 🎯 How to Use
+## How to Use
 
 ### Main Interface
 1. **Time Selection**: Use the sidebar slider to select the hour of day (0-23)
@@ -96,7 +114,7 @@ The application uses pre-computed predictions from a neural network model traine
 - **Color Coding**: Green (Low), Orange (Moderate), Red (High)
 - **Detailed Metrics**: Severity, delay length, and coordinates
 
-## 🔧 Technical Architecture
+## Technical Architecture
 
 ### Core Components
 - **Frontend**: Streamlit web framework
@@ -116,7 +134,7 @@ The application uses pre-computed predictions from a neural network model traine
 - **Responsive Design**: Adapts to different screen sizes
 - **Real-time Updates**: Instant updates when changing parameters
 
-## 📈 Machine Learning Model
+## Machine Learning Model
 
 ### Neural Network Architecture
 The delay predictions are generated using a neural network model with comprehensive features:
@@ -148,7 +166,10 @@ def create_likelihood_from_severity_and_length(severity, length):
     return min(likelihood, 1.0)
 ```
 
-## 🚀 Deployment Options
+## Deployment Options
+
+### Live Demo
+**Try the app online**: [https://xiaotong-shen-sdss-datathon-2025-extended-app-zcrsie.streamlit.app/](https://xiaotong-shen-sdss-datathon-2025-extended-app-zcrsie.streamlit.app/)
 
 ### Local Development
 ```bash
@@ -178,7 +199,7 @@ EXPOSE 8501
 CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 ```
 
-## 🎨 Customization
+## Customization
 
 ### Styling
 The application uses custom CSS for enhanced visual appeal:
@@ -193,7 +214,7 @@ To extend the application:
 2. Update the main interface in `app.py`
 3. Include additional data sources as needed
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 SDSS-Datathon-2025-extended/
@@ -210,7 +231,7 @@ SDSS-Datathon-2025-extended/
 └── logs/                                    # Application logs
 ```
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 ### Planned Features
 1. **Real-time Data**: Live TTC API integration
@@ -225,7 +246,7 @@ SDSS-Datathon-2025-extended/
 3. **Seasonal Patterns**: Weather and seasonal effects
 4. **Demographic Data**: Population density correlation
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -254,7 +275,7 @@ SDSS-Datathon-2025-extended/
 - Verify all dependencies are installed correctly
 - Ensure Python version compatibility (3.8+ recommended)
 
-## 📝 Development History
+## Development History
 
 ### Original Project
 - **SDSS Datathon 2025**: Initial machine learning model development
@@ -267,7 +288,7 @@ SDSS-Datathon-2025-extended/
 - **Interactive Visualizations**: Maps, charts, and analytics dashboard
 - **User Experience**: Intuitive controls and responsive design
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -275,19 +296,19 @@ SDSS-Datathon-2025-extended/
 4. Test thoroughly
 5. Submit a pull request
 
-## 📞 Support
+## Support
 
 For questions or issues:
 - Check the troubleshooting section above
 - Review the neural network implementation in `python notebooks/neuralnet.py`
 - Contact the development team
 
-## 📄 License
+## License
 
-This project is part of the SDSS Datathon 2025 Extended Challenge.
+This project is extending the work me and my groupmates did in the SDSS Datathon 2025.
 
 ---
 
-**Built with ❤️ for the TTC and Toronto commuters**
+**Built with dedication for the TTC and Toronto commuters**
 
 *Successfully migrated from Svelte to Streamlit for improved development velocity and user experience.*
