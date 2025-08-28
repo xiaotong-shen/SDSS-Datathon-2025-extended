@@ -122,13 +122,7 @@ def create_delay_map(predictions_df, selected_hour, selected_month=None, selecte
     # Using a much larger multiplier to create dramatic size differences
     filtered_data['scaled_size'] = (filtered_data['likelihood_of_delay'] - 0.26) * 50
     
-    # Debug: Print size range for verification
-    if st.checkbox("Show size debugging info", key="debug_sizes"):
-        st.write(f"Original likelihood range: {filtered_data['likelihood_of_delay'].min():.3f} to {filtered_data['likelihood_of_delay'].max():.3f}")
-        st.write(f"Scaled size range: {filtered_data['scaled_size'].min():.1f} to {filtered_data['scaled_size'].max():.1f}")
-        st.write(f"Sample stations with sizes:")
-        sample_data = filtered_data[['station', 'likelihood_of_delay', 'scaled_size']].head(5)
-        st.dataframe(sample_data)
+
     
     fig = px.scatter_map(
         filtered_data,
@@ -297,16 +291,6 @@ def main():
         
         # Get current prediction
         current_prediction = get_delay_prediction(predictions_df, selected_station, selected_hour, selected_month, selected_day_num)
-        
-        # Debug: Show prediction details
-        if st.checkbox("Show prediction debugging info", key="debug_prediction"):
-            st.write(f"Selected parameters: Station={selected_station}, Hour={selected_hour}, Month={selected_month}, Day={selected_day_num}")
-            st.write(f"Available data for station: {len(predictions_df[predictions_df['station'] == selected_station])} rows")
-            st.write(f"Available data for hour {selected_hour}: {len(predictions_df[predictions_df['hour'] == selected_hour])} rows")
-            if current_prediction is not None:
-                st.write("Current prediction found:", current_prediction.to_dict())
-            else:
-                st.write("No prediction found for these parameters")
         
         if current_prediction is not None:
             # Display prediction metrics
